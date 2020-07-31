@@ -3,14 +3,11 @@ package com.example.lockscreen
 import android.app.ActivityManager
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
-import android.view.KeyEvent
-import android.view.KeyEvent.*
 import android.view.View
-import android.view.WindowManager
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_lock_screen.*
-
 
 class LockScreenActivity : AppCompatActivity() {
 
@@ -36,6 +33,20 @@ class LockScreenActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
 
+        btnCall.setOnClickListener {
+            val intent = Intent(Intent.ACTION_DIAL)
+            startActivity(intent)
+        }
+        btnSms.setOnClickListener {
+            val intent = Intent(Intent.ACTION_MAIN)
+            intent.addCategory(Intent.CATEGORY_APP_MESSAGING)
+            startActivity(intent)
+        }
+        btnContacts.setOnClickListener {
+            val intent = Intent(Intent.ACTION_MAIN)
+            intent.addCategory(Intent.CATEGORY_APP_CONTACTS)
+            startActivity(intent)
+        }
     }
 
     override fun onPause(): Unit {

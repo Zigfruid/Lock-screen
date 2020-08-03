@@ -1,4 +1,4 @@
-package com.example.lockscreen.ui
+package com.example.lockscreen.fragments
 
 import androidx.fragment.app.Fragment
 import com.example.lockscreen.R

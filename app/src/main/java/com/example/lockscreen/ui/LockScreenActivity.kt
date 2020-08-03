@@ -4,29 +4,33 @@ import android.app.ActivityManager
 import android.content.Context
 import android.os.Bundle
 import android.text.TextUtils.replace
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.PopupMenu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.lockscreen.R
 import com.example.lockscreen.fragments.CallFragment
+import com.example.lockscreen.fragments.ContactFragment
+import com.example.lockscreen.fragments.MessageFragment
 import kotlinx.android.synthetic.main.activity_lock_screen.*
 
 
 class LockScreenActivity : AppCompatActivity() {
+    private val callFragment = CallFragment()
+    private val smsFragment = MessageFragment()
+    private val contactFragment = ContactFragment()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lock_screen)
-
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-        val callFragment = CallFragment()
-        val smsFragment = MessageFragment()
-        val contactFragment = ContactFragment()
+        setSupportActionBar(toolbar)
 
-
+        makeCurrentFragment(CallFragment())
 
         bottomNav.setOnNavigationItemSelectedListener {
             when(it.itemId){
@@ -39,22 +43,19 @@ class LockScreenActivity : AppCompatActivity() {
 
     }
 
-    fun optionMenu(view : View){
-        val menuOption = PopupMenu(this, view)
-        val menuInflater = menuOption.menuInflater
-        menuInflater.inflate(R.menu.pop_menu, menuOption.menu)
-        menuOption.setOnMenuItemClickListener {
-            when(it.itemId){
-                R.id.exit -> {
-                    onDestroy()
-                    finish()
-                }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+       menuInflater.inflate(R.menu.pop_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.exit -> {
+                finish()
+                onDestroy()
             }
-            return@setOnMenuItemClickListener true
         }
-        menuOption.show()
-
+        return super.onOptionsItemSelected(item)
     }
 
 

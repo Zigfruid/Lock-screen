@@ -1,8 +1,9 @@
-package com.example.lockscreen
+package com.example.lockscreen.ui
 
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import com.example.lockscreen.ui.MainActivity
 
 class StartActivityOnBootReceiver : BroadcastReceiver() {
     override fun onReceive(p0: Context?, p1: Intent?) {
@@ -11,6 +12,5 @@ class StartActivityOnBootReceiver : BroadcastReceiver() {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             p0?.startActivity(intent)
         }
-
     }
 }

@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.lockscreen.R
@@ -30,6 +31,7 @@ class LockScreenActivity : AppCompatActivity() {
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
         setSupportActionBar(toolbar)
 
+
         makeCurrentFragment(CallFragment())
 
         bottomNav.setOnNavigationItemSelectedListener {
@@ -43,17 +45,15 @@ class LockScreenActivity : AppCompatActivity() {
 
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-       menuInflater.inflate(R.menu.pop_menu, menu)
-        return super.onCreateOptionsMenu(menu)
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.pop_menu, menu)
+        return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.exit -> {
-                finish()
-                onDestroy()
-            }
+            R.id.exit->{finish()
+                return true}
         }
         return super.onOptionsItemSelected(item)
     }
